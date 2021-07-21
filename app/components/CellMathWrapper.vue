@@ -354,7 +354,7 @@ export default {
 
 .hudWrapper {
   position: fixed;
-  top: 8px;
+  bottom: 8px;
   right: 12px;
   z-index: 100;
   padding: 12px;
