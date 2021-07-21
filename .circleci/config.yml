@@ -8,13 +8,19 @@ jobs:
       - restore_cache:
           keys:
             - npm-{{ checksum "./app/package.json" }}
-      - run: npm install
+      - run: 
+        command: npm install
+        working_directory: app
       - save_cache:
           paths:
             - node_modules
           key: npm-{{ checksum "./app/package.json" }}
-      - run: npm run lint
-      - run: npm run test
+      - run:
+        command: npm run lint
+        working_directory: app
+      - run:
+        command: npm run test
+        working_directory: app
   deploy:
     docker:
       - image: cimg/node:lts
@@ -23,12 +29,21 @@ jobs:
       - restore_cache:
           keys:
             - npm-{{ checksum "./app/package.json" }}
-      - run: cd ./app
-      - run: npm install
-      - run: git config user.name $GITHUB_NAME
-      - run: git config user.email $GITHUB_EMAIL
-      - run: npm run generate:gh-pages
-      - run: npm run deploy:gh-pages
+      - run:
+        command: npm install
+        working_directory: app
+      - run:
+        command: git config user.name $GITHUB_NAME
+        working_directory: app
+      - run:
+        command: git config user.email $GITHUB_EMAIL
+        working_directory: app
+      - run:
+        command: npm run generate:gh-pages
+        working_directory: app
+      - run:
+        command: npm run deploy:gh-pages
+        working_directory: app
 workflows:
   version: 2
   build-deploy:
