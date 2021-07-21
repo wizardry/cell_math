@@ -14,7 +14,7 @@ module.exports = {
   ],
   plugins: [
   ],
-  ignorePatterns: [".circleci"],
+  ignorePatterns: [".circleci", ".eslintrc.js"],
   // add your custom rules here
   rules: {
     "comma-dangle": "off",
