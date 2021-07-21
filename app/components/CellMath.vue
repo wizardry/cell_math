@@ -1,18 +1,20 @@
 <template>
   <div>
-    <table>
+    <table class="table">
       <thead>
         <tr>
-          <th />
-          <th v-for="column in columnData" :key="`thx:${column.id}`">
+          <th class="thead thead-empty" />
+          <th v-for="column in columnData" :key="`thx:${column.id}`" class="thead">
             {{ column.value }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(row, yIndex) in rowData" :key="`r:${yIndex}`">
-          <th>{{ row.value }}</th>
-          <td v-for="(column, xIndex) in columnData" :key="`y:${yIndex},x${column.id}`">
+          <th class="thead">
+            {{ row.value }}
+          </th>
+          <td v-for="(column, xIndex) in columnData" :key="`y:${yIndex},x${column.id}`" class="td">
             <cell-input
               ref="input"
               :answer="answers[yIndex][xIndex]"
@@ -58,7 +60,13 @@ export default {
     answers () {
       return [...Array(this.rowData.length)].map((_, row) => {
         return [...Array(this.columnData.length)].map((__, column) => {
-          return this.columnData[column].value + this.rowData[row].value;
+          if (this.calcType === 'add') {
+            return this.columnData[column].value + this.rowData[row].value;
+          }
+          if (this.calcType === 'multi') {
+            return this.columnData[column].value * this.rowData[row].value;
+          }
+          return null;
         })
       })
     },
@@ -82,14 +90,14 @@ export default {
     },
     onNextRow (position) {
       const index = position + this.columnData.length;
-      if (index > this.$refs.input.length) {
+      if (index >= this.$refs.input.length) {
         return;
       }
       this.$refs.input[index].$refs.input.focus();
     },
     onNextCol (position) {
       const index = position + 1;
-      if (index > this.$refs.input.length) {
+      if (index >= this.$refs.input.length) {
         return;
       }
       this.$refs.input[index].$refs.input.focus();
@@ -111,8 +119,32 @@ export default {
   },
 }
 </script>
-<style>
-.nuxt-logo {
-  height: 180px;
+<style lang="scss">
+
+.table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-radius: 3px;
+}
+
+.thead-wrap {
+  position: sticky;
+}
+
+.thead {
+  padding: 4px;
+  min-width: 24px;
+  background: #509bb7;
+  border: 1px solid #eee;
+  color: #fff;
+
+  &-empty {
+    background: darken(#509bb7, 10%);
+  }
+}
+
+.td {
+  padding: 4px;
+  border: 1px solid #eee;
 }
 </style>

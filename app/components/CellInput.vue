@@ -1,9 +1,10 @@
 <template>
-  <div :class="cellClass">
-    <span>{{ columnValue }} {{ operator }} {{ rowValue }}</span>
+  <div class="mass" :class="cellClass">
+    <span class="mass-formula">{{ columnValue }} {{ operator }} {{ rowValue }}</span>
     <input
       ref="input"
       v-model="inputAnswer"
+      class="mass-input"
       type="number"
       @change="onChange"
       @keydown.prevent.enter="onNextRow"
@@ -107,6 +108,36 @@ export default {
 .fail {
   input {
     background: #ffb6c1;
+  }
+}
+
+.mass {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &-formula {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    padding: 8px 0;
+    text-align: center;
+    font-size: 10px;
+    color: #666;
+  }
+
+  &-input {
+    padding: 4px;
+    max-width: 50px;
+
+    border-width: 1px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    appearance: none;
+
+    &:focus {
+      outline: darken(#509bb7, 10%);;
+    }
   }
 }
 </style>
