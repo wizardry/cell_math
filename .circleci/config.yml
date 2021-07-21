@@ -4,11 +4,11 @@ jobs:
     docker:
       - image: cimg/node:lts
     steps:
-      - working_directory: 'app'
       - checkout
       - restore_cache:
           keys:
             - npm-{{ checksum "./app/package.json" }}
+      - working_directory: './app'
       - run: npm install
       - save_cache:
           paths:
@@ -20,11 +20,11 @@ jobs:
     docker:
       - image: cimg/node:lts
     steps:
-      - working_directory: 'app'
       - checkout
       - restore_cache:
           keys:
             - npm-{{ checksum "./app/package.json" }}
+      - working_directory: './app'
       - run: cd ./app
       - run: npm install
       - run: git config user.name $GITHUB_NAME
