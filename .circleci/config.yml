@@ -7,13 +7,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - npm-{{ checksum "package.json" }}
+            - npm-{{ checksum "./app/package.json" }}
       - run: cd ./app
       - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: npm-{{ checksum "package.json" }}
+          key: npm-{{ checksum "./app/package.json" }}
       - run: npm run lint
       - run: npm run test
   deploy:
@@ -23,7 +23,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - npm-{{ checksum "package.json" }}
+            - npm-{{ checksum "./app/package.json" }}
       - run: cd ./app
       - run: npm install
       - run: git config user.name $GITHUB_NAME
