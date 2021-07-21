@@ -9,6 +9,7 @@ jobs:
           keys:
             - npm-{{ checksum "./app/package.json" }}
       - run: 
+        name: install
         command: npm install
         working_directory: app
       - save_cache:
@@ -16,9 +17,11 @@ jobs:
             - node_modules
           key: npm-{{ checksum "./app/package.json" }}
       - run:
+        name: lint
         command: npm run lint
         working_directory: app
       - run:
+        name: test
         command: npm run test
         working_directory: app
   deploy:
@@ -30,18 +33,23 @@ jobs:
           keys:
             - npm-{{ checksum "./app/package.json" }}
       - run:
+        name: install
         command: npm install
         working_directory: app
       - run:
+        name: github setting name
         command: git config user.name $GITHUB_NAME
         working_directory: app
       - run:
+        name: github setting email
         command: git config user.email $GITHUB_EMAIL
         working_directory: app
       - run:
+        name: generate
         command: npm run generate:gh-pages
         working_directory: app
       - run:
+        name: deploy
         command: npm run deploy:gh-pages
         working_directory: app
 workflows:
