@@ -1,5 +1,5 @@
 <template>
-  <Tutorial />
+  <cell-math-wrapper />
 </template>
 
 <script>
