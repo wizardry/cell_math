@@ -1,4 +1,4 @@
-const baseRoute = env => (env === 'GH_PAGES' ? '/cell_math/' : '/')
+const baseRoute = env => (env === 'GH_PAGES' ? '/mass_calc/' : '/')
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
