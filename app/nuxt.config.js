@@ -1,4 +1,4 @@
-const baseRoute = env => (env === 'GH_PAGES' ? '/nuxt-circle-ci/' : '/')
+const baseRoute = env => (env === 'GH_PAGES' ? '/cell_math/' : '/')
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
