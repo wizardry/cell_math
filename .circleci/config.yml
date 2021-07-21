@@ -8,13 +8,14 @@ jobs:
       - restore_cache:
           keys:
             - npm-{{ checksum "./app/package.json" }}
-      - run: cd ./app npm install
+      - run: cd ./app
+      - run: npm install
       - save_cache:
           paths:
             - node_modules
           key: npm-{{ checksum "./app/package.json" }}
-      - run: cd ./app npm run lint
-      - run: cd ./app npm run test
+      - run: npm run lint
+      - run: npm run test
   deploy:
     docker:
       - image: cimg/node:lts
@@ -27,8 +28,8 @@ jobs:
       - run: npm install
       - run: git config user.name $GITHUB_NAME
       - run: git config user.email $GITHUB_EMAIL
-      - run: cd ./app npm run generate:gh-pages
-      - run: cd ./app npm run deploy:gh-pages
+      - run: npm run generate:gh-pages
+      - run: npm run deploy:gh-pages
 workflows:
   version: 2
   build-deploy:
