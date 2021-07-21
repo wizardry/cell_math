@@ -8,6 +8,7 @@ jobs:
       - restore_cache:
           keys:
             - npm-{{ checksum "package.json" }}
+      - run: cd ./app
       - run: npm install
       - save_cache:
           paths:
@@ -23,6 +24,7 @@ jobs:
       - restore_cache:
           keys:
             - npm-{{ checksum "package.json" }}
+      - run: cd ./app
       - run: npm install
       - run: git config user.name $GITHUB_NAME
       - run: git config user.email $GITHUB_EMAIL
