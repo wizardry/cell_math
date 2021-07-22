@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <h1 class="header">
       100マスけいさん
     </h1>
@@ -90,36 +90,36 @@
           </li>
         </ul>
       </div>
-      <div v-if="isStarted" class="cellMathContent">
-        <cell-math
-          :column-data="mathData.x"
-          :row-data="mathData.y"
-          :calc-type="mathData.calcType"
-          @done="onDone"
-          @change="onChange"
-        />
-      </div>
-      <div v-if="isFinished" class="result-content">
-        <p class="finish-text">
-          クリアにかかった じかん は {{ countTimeText }} びょう でした!
-        </p>
+    </div>
+    <div v-if="isStarted" class="cellMathContent">
+      <cell-math
+        :column-data="mathData.x"
+        :row-data="mathData.y"
+        :calc-type="mathData.calcType"
+        @done="onDone"
+        @change="onChange"
+      />
+    </div>
+    <div v-if="isFinished" class="result-content">
+      <p class="finish-text">
+        クリアにかかった じかん は {{ countTimeText }} びょう でした!
+      </p>
 
-        <p class="history-head">
-          りれき
-          <button class="button" @click="resetHistory">
-            りれき を けす
-          </button>
-        </p>
-        <ul class="history">
-          <li v-for="(item, index) in history" :key="`history:${index}`">
-            <span>よこ: {{ item.widthSize }}マス</span>
-            <span>たて: {{ item.heightSize }}マス</span>
-            <span>すうじ: {{ item.minMath }} ～ {{ item.maxMath }} まで</span>
-            <span>けいさん: {{ item.calcTypeText }}</span>
-            <span>じかん: {{ item.countTimeText }} びょう</span>
-          </li>
-        </ul>
-      </div>
+      <p class="history-head">
+        りれき
+        <button class="button" @click="resetHistory">
+          りれき を けす
+        </button>
+      </p>
+      <ul class="history">
+        <li v-for="(item, index) in history" :key="`history:${index}`">
+          <span>よこ: {{ item.widthSize }}マス</span>
+          <span>たて: {{ item.heightSize }}マス</span>
+          <span>すうじ: {{ item.minMath }} ～ {{ item.maxMath }} まで</span>
+          <span>けいさん: {{ item.calcTypeText }}</span>
+          <span>じかん: {{ item.countTimeText }} びょう</span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -279,6 +279,9 @@ export default {
 }
 </script>
 <style lang="scss">
+.page {
+  padding-bottom: 100px;
+}
 .header {
   margin: 0;
   padding: 4px 12px;
