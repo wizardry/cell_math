@@ -34,7 +34,7 @@ export default {
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-  htmlAttrs:{ lang: 'ja'}
+  htmlAttrs: { lang: 'ja' },
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
